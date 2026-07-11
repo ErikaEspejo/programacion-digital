@@ -1,0 +1,92 @@
+iniciar-programa
+	define-nueva-instruccion gira-n-veces(n) como inicio
+    	repetir n veces inicio
+        	gira-izquierda;
+        fin;
+    fin;
+
+	define-nueva-instruccion orientar-sur como inicio
+    	 si orientado-al-este entonces inicio
+         	gira-n-veces(3)
+         fin;
+         si orientado-al-oeste entonces inicio
+         	gira-n-veces(1)
+         fin;
+         si orientado-al-norte entonces inicio
+         	gira-n-veces(2)
+         fin;
+    fin;
+    
+    define-nueva-instruccion orientar-norte como inicio
+    	 si orientado-al-este entonces inicio
+         	gira-n-veces(1)
+         fin;
+         si orientado-al-oeste entonces inicio
+         	gira-n-veces(3)
+         fin;
+         si orientado-al-sur entonces inicio
+         	gira-n-veces(2)
+         fin;
+    fin;
+    
+    define-nueva-instruccion avanza-indefinido como inicio
+        si junto-a-zumbador entonces
+            coge-zumbador;
+        fin;
+        mientras frente-libre hacer inicio
+         	avanza;
+            si junto-a-zumbador entonces inicio
+            	coge-zumbador;
+            fin;
+         fin;
+    fin;
+    
+    define-nueva-instruccion gira-derecha como inicio
+    	gira-n-veces(3);
+    fin;
+    
+    define-nueva-instruccion ubicate-origen como inicio
+    	orientar-sur;
+        avanza-indefinido;
+        gira-derecha;
+        avanza-indefinido;
+        gira-derecha;
+    fin;
+        
+
+	inicia-ejecucion
+    	ubicate-origen;        
+        mientras frente-libre hacer inicio
+        	avanza-indefinido;            
+            gira-derecha;
+            si frente-libre entonces inicio
+            	avanza;
+            fin;
+
+            si junto-a-zumbador entonces inicio
+            	coge-zumbador;
+            fin;
+            gira-derecha;
+            avanza-indefinido;
+           	gira-izquierda;
+           	si frente-libre entonces inicio
+            	avanza;
+            fin
+            sino inicio
+            	orientar-sur;
+            fin;
+           	si junto-a-zumbador entonces inicio
+           		coge-zumbador;
+           	fin;
+           	gira-izquierda; 
+        fin;
+        
+        orientar-norte;
+        avanza-indefinido;
+        mientras algun-zumbador-en-la-mochila hacer inicio
+        	deja-zumbador;
+        fin;
+        
+        apagate;
+    termina-ejecucion
+finalizar-programa

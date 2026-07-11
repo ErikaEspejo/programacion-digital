@@ -1,0 +1,95 @@
+iniciar-programa
+
+	define-nueva-instruccion gira-n-veces(n) como inicio
+    	repetir n veces inicio
+        	gira-izquierda;
+        fin;
+    fin;
+	
+    define-nueva-instruccion gira-derecha como inicio
+    	gira-n-veces(3);
+    fin;
+        
+    define-nueva-instruccion orientar-sur como inicio
+    	 si orientado-al-este entonces inicio
+         	gira-n-veces(3)
+         fin
+         sino inicio
+            si orientado-al-oeste entonces inicio
+         	    gira-n-veces(1)
+            fin
+            sino inicio
+                si orientado-al-norte entonces inicio
+         	        gira-n-veces(2)
+                fin;
+            fin;
+        fin;
+    fin;
+    
+    define-nueva-instruccion orientar-norte como inicio
+    	si orientado-al-este entonces inicio
+         	gira-n-veces(1)
+         fin
+         sino inicio
+            si orientado-al-oeste entonces inicio
+         	    gira-n-veces(3)
+            fin
+            sino inicio
+                si orientado-al-sur entonces inicio
+         	        gira-n-veces(2)
+                fin;
+            fin;
+        fin;
+    fin;
+    
+    define-nueva-instrucción avanza-izquierda-con-zumbador como inicio
+   		gira-izquierda;
+        si frente-libre entonces inicio
+        	avanza;
+        fin;
+        si no-junto-a-zumbador entonces inicio
+        	deja-zumbador;
+        fin;
+    fin;
+    
+    define-nueva-instrucción avanza-derecha como inicio
+    	gira-derecha;
+        si frente-libre entonces inicio
+        	avanza;
+        fin;
+    fin;
+    
+    define-nueva-instruccion crea-diagonal como inicio
+    	orientar-norte;
+    	deja-zumbador;
+        mientras frente-libre hacer inicio
+        	avanza-derecha;
+            avanza-izquierda-con-zumbador;
+        fin;
+        orientar-sur;
+    fin;
+    
+    define-nueva-instruccion retrocede como inicio
+    	 gira-n-veces(2);
+         si frente-libre entonces inicio
+         	avanza;
+         fin;      
+         gira-izquierda;
+    fin;
+	
+    inicia-ejecucion
+        mientras no-junto-a-zumbador hacer inicio
+            crea-diagonal;
+            mientras frente-libre hacer inicio
+                avanza;
+            fin;
+            gira-derecha;
+            mientras no-junto-a-zumbador hacer inicio
+                avanza;
+            fin;
+            retrocede;
+        fin;
+
+        apagate;
+    termina-ejecucion
+finalizar-programa
