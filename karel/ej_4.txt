@@ -1,0 +1,83 @@
+iniciar-programa 
+	define-nueva-instruccion gira-n-veces(n) como inicio 
+    	repetir n veces inicio 
+        	gira-izquierda; 
+        fin; 
+    fin;
+    
+    define-nueva-instruccion gira-derecha como inicio 
+    	gira-n-veces(3); 
+    fin; 
+    
+    define-nueva-instruccion vuelve-centro-derecha como inicio 
+    	gira-derecha; 
+        avanza; 
+        gira-derecha; 
+        avanza;
+    fin; 
+    
+    define-nueva-instruccion vuelve-centro-izquierda como inicio 
+    	gira-izquierda; 
+        avanza; 
+        gira-izquierda; 
+        avanza;
+    fin; 
+    
+    inicia-ejecucion 
+    	mientras frente-libre  y izquierda-libre y derecha-libre hacer inicio 
+        	avanza; 
+            si derecha-libre entonces inicio
+                gira-derecha; 
+                avanza;  
+                si derecha-bloqueada entonces inicio 
+                    apagate; 
+                fin 
+                sino inicio 
+                    gira-derecha;
+                    avanza;
+                    si derecha-bloqueada entonces inicio 
+                        apagate; 
+                    fin 
+                    sino inicio
+                      vuelve-centro-derecha-1; 
+                    fin;
+                fin; 
+            fin;
+            si izquierda-libre entonces inicio
+                gira-izquierda; 
+                avanza; 
+                    si izquierda-bloqueada entonces inicio 
+                        apagate; 
+                    fin 
+                    sino inicio 
+                        gira-izquierda;
+                        avanza;
+                    si izquierda-bloqueada entonces inicio 
+                        apagate; 
+                    fin 
+                    sino inicio
+                        vuelve-centro-izquierda;
+                    fin;
+              fin; 
+            fin;
+        fin; 
+        
+        si izquierda-libre y derecha-bloqueada entonces inicio
+        	gira-n-veces(2);
+        fin; 
+        si izquierda-libre entonces inicio
+        	gira-derecha; 
+        fin;
+        
+        mientras izquierda-bloqueada hacer inicio 
+            si frente-bloqueado entonces inicio
+            	gira-derecha;
+            fin;
+            avanza;  
+        fin;
+        gira-izquierda;
+        avanza;
+        apagate;
+        
+    termina-ejecucion 
+ finalizar-programa
