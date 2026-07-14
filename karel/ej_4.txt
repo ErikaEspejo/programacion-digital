@@ -1,0 +1,123 @@
+iniciar-programa
+
+    define-nueva-instruccion gira-n-veces(n) como inicio
+        repetir n veces inicio
+            gira-izquierda;
+        fin;
+    fin;
+
+    define-nueva-instruccion gira-derecha como inicio
+        gira-n-veces(3);
+    fin;
+
+
+    define-nueva-instruccion vuelve-centro-derecha como inicio
+        gira-derecha;
+        avanza;
+        gira-derecha;
+        avanza;
+    fin;
+
+    define-nueva-instruccion vuelve-centro-izquierda como inicio
+        gira-izquierda;
+        avanza;
+        gira-izquierda;
+        avanza;
+    fin;
+
+
+    define-nueva-instruccion revisa-primer-camino-derecha como inicio
+        gira-derecha;
+        avanza;
+
+        si derecha-bloqueada entonces inicio
+            apagate;
+        fin
+        sino inicio
+            gira-derecha;
+            avanza;
+
+            si derecha-bloqueada entonces inicio
+                apagate;
+            fin
+            sino inicio
+                vuelve-centro-derecha;
+            fin;
+        fin;
+    fin;
+
+    define-nueva-instruccion revisa-primer-camino-izquierda como inicio
+        gira-izquierda;
+        avanza;
+
+        si izquierda-bloqueada entonces inicio
+            apagate;
+        fin
+        sino inicio
+            gira-izquierda;
+            avanza;
+
+            si izquierda-bloqueada entonces inicio
+                apagate;
+            fin
+            sino inicio
+                vuelve-centro-izquierda;
+            fin;
+        fin;
+    fin;
+
+
+    define-nueva-instruccion revisa-caminos-laterales como inicio
+        si derecha-libre entonces inicio
+            revisa-primer-camino-derecha;
+        fin;
+
+        si izquierda-libre entonces inicio
+            revisa-primer-camino-izquierda;
+        fin;
+    fin;
+
+
+    define-nueva-instruccion recorre-zona-central como inicio
+        mientras frente-libre y izquierda-libre y derecha-libre hacer inicio
+            avanza;
+            revisa-caminos-laterales;
+        fin;
+    fin;
+
+
+    define-nueva-instruccion ajusta-direccion-final como inicio
+        si izquierda-libre y derecha-bloqueada entonces inicio
+            gira-n-veces(2);
+        fin;
+
+        si izquierda-libre entonces inicio
+            gira-derecha;
+        fin;
+    fin;
+
+
+    define-nueva-instruccion sigue-pared-hasta-salida como inicio
+        mientras izquierda-bloqueada hacer inicio
+            si frente-bloqueado entonces inicio
+                gira-derecha;
+            fin;
+
+            avanza;
+        fin;
+
+        gira-izquierda;
+        avanza;
+    fin;
+
+
+    inicia-ejecucion
+
+        recorre-zona-central;
+        ajusta-direccion-final;
+        sigue-pared-hasta-salida;
+        apagate;
+
+    termina-ejecucion
+
+finalizar-programa
