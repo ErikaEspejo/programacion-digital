@@ -1,95 +1,111 @@
 iniciar-programa
 
-	define-nueva-instruccion gira-n-veces(n) como inicio
-    	repetir n veces inicio
-        	gira-izquierda;
+    define-nueva-instruccion gira-n-veces(n) como inicio
+        repetir n veces inicio
+            gira-izquierda;
         fin;
     fin;
-	
+
     define-nueva-instruccion gira-derecha como inicio
-    	gira-n-veces(3);
+        gira-n-veces(3);
     fin;
-        
+
     define-nueva-instruccion orientar-sur como inicio
-    	 si orientado-al-este entonces inicio
-         	gira-n-veces(3)
-         fin
-         sino inicio
+        si orientado-al-este entonces inicio
+            gira-n-veces(3)
+        fin
+        sino inicio
             si orientado-al-oeste entonces inicio
-         	    gira-n-veces(1)
+                gira-n-veces(1)
             fin
             sino inicio
                 si orientado-al-norte entonces inicio
-         	        gira-n-veces(2)
+                    gira-n-veces(2)
                 fin;
             fin;
         fin;
     fin;
-    
+
     define-nueva-instruccion orientar-norte como inicio
-    	si orientado-al-este entonces inicio
-         	gira-n-veces(1)
-         fin
-         sino inicio
+        si orientado-al-este entonces inicio
+            gira-n-veces(1)
+        fin
+        sino inicio
             si orientado-al-oeste entonces inicio
-         	    gira-n-veces(3)
+                gira-n-veces(3)
             fin
             sino inicio
                 si orientado-al-sur entonces inicio
-         	        gira-n-veces(2)
+                    gira-n-veces(2)
                 fin;
             fin;
         fin;
     fin;
-    
-    define-nueva-instrucción avanza-izquierda-con-zumbador como inicio
-   		gira-izquierda;
+
+    define-nueva-instruccion avanza-a-la-siguiente-columna como inicio
+        gira-derecha;
         si frente-libre entonces inicio
-        	avanza;
+            avanza;
+        fin;
+    fin;
+
+    define-nueva-instruccion avanza-a-la-siguiente-fila-y-marca como inicio
+        gira-izquierda;
+        si frente-libre entonces inicio
+            avanza;
         fin;
         si no-junto-a-zumbador entonces inicio
-        	deja-zumbador;
+            deja-zumbador;
         fin;
     fin;
-    
-    define-nueva-instrucción avanza-derecha como inicio
-    	gira-derecha;
-        si frente-libre entonces inicio
-        	avanza;
-        fin;
-    fin;
-    
+
     define-nueva-instruccion crea-diagonal como inicio
-    	orientar-norte;
-    	deja-zumbador;
+        orientar-norte;
+        deja-zumbador;
+
         mientras frente-libre hacer inicio
-        	avanza-derecha;
-            avanza-izquierda-con-zumbador;
+            avanza-a-la-siguiente-columna;
+            avanza-a-la-siguiente-fila-y-marca;
         fin;
+
         orientar-sur;
     fin;
-    
-    define-nueva-instruccion retrocede como inicio
-    	 gira-n-veces(2);
-         si frente-libre entonces inicio
-         	avanza;
-         fin;      
-         gira-izquierda;
+
+    define-nueva-instruccion baja-hasta-el-borde como inicio
+        mientras frente-libre hacer inicio
+            avanza;
+        fin;
     fin;
-	
+
+    define-nueva-instruccion busca-el-inicio-de-la-diagonal como inicio
+        gira-derecha;
+
+        mientras no-junto-a-zumbador hacer inicio
+            avanza;
+        fin;
+    fin;
+
+    define-nueva-instruccion ubica-inicio-siguiente-diagonal como inicio
+        gira-n-veces(2);
+
+        si frente-libre entonces inicio
+            avanza;
+        fin;
+
+        gira-izquierda;
+    fin;
+
     inicia-ejecucion
+
         mientras no-junto-a-zumbador hacer inicio
             crea-diagonal;
-            mientras frente-libre hacer inicio
-                avanza;
-            fin;
-            gira-derecha;
-            mientras no-junto-a-zumbador hacer inicio
-                avanza;
-            fin;
-            retrocede;
+            baja-hasta-el-borde;
+            busca-el-inicio-de-la-diagonal;
+            ubica-inicio-siguiente-diagonal;
         fin;
 
         apagate;
+
     termina-ejecucion
+
 finalizar-programa
