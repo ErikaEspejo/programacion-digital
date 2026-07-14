@@ -1,4 +1,5 @@
 // Dado un valor, descomponerlo en sus factores primos.
+
 Funcion new_number <- read_new_number
 	Escribir "Ingresa un número"
 	Leer new_number

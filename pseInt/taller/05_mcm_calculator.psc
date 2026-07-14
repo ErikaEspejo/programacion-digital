@@ -1,3 +1,5 @@
+// Hallar el MCM de todos los números leídos antes de recibir un número negativo.
+
 Funcion new_number <- read_new_number
 	Escribir "Ingresa un número"
 	Leer new_number

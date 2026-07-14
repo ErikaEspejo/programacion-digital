@@ -1,3 +1,5 @@
+// Determinar si un número es primo.
+
 Funcion new_number <- read_new_number
 	Escribir "Ingresa un número"
 	Leer new_number

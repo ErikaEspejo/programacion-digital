@@ -1,3 +1,6 @@
+// Leer números únicamente en sentido ascendente. 
+// Una vez reciba un número que sea menor que el anterior, con solo los números ascendentes hallar cuantos de ellos fueron impares.
+
 Funcion new_number <- read_new_number 
 	Escribir "Ingresa un número"
 	Leer new_number
