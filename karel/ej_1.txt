@@ -1,54 +1,67 @@
 iniciar-programa
-	
+
     define-nueva-instruccion gira-derecha como inicio
-    	repetir 3 veces inicio
-        	gira-izquierda;
+        repetir 3 veces inicio
+            gira-izquierda;
         fin;
     fin;
-    
-	define-nueva-instruccion avanza-hasta-muro como inicio
-    	mientras frente-libre hacer inicio
-        	avanza;
+
+    define-nueva-instruccion avanza-hasta-muro como inicio
+        mientras frente-libre hacer inicio
+            avanza;
         fin;
     fin;
-    
-    define-nueva-instrucción voltea-muro-izquierda como inicio
-    	gira-izquierda;
+
+    define-nueva-instruccion rodea-muro-por-izquierda como inicio
+        gira-izquierda;
         avanza;
         gira-derecha;
+
         si frente-bloqueado entonces inicio
-        	apagate;
+            apagate;
         fin;
+
         avanza;
         gira-derecha;
         avanza;
         gira-izquierda;
     fin;
-    
-    define-nueva-instrucción voltea-muro-derecha como inicio
-    	gira-derecha;
+
+    define-nueva-instruccion rodea-muro-por-derecha como inicio
+        gira-derecha;
         avanza;
         gira-izquierda;
+
         si frente-bloqueado entonces inicio
-        	apagate;
+            apagate;
         fin;
+
         avanza;
         gira-izquierda;
         avanza;
         gira-derecha;
     fin;
-	
+
+    define-nueva-instruccion rodea-muro como inicio
+        si izquierda-libre entonces inicio
+            rodea-muro-por-izquierda;
+        fin
+        sino inicio
+            rodea-muro-por-derecha;
+        fin;
+    fin;
+
     inicia-ejecucion
-    	avanza-hasta-muro;
+
+        avanza-hasta-muro;
+
         mientras no-junto-a-zumbador hacer inicio
-        	si izquierda-libre entonces inicio
-        		voltea-muro-izquierda;
-       	 	fin
-            sino inicio
-        		voltea-muro-derecha;
-       	 	fin;
+            rodea-muro;
             avanza-hasta-muro;
         fin;
+
         apagate;
+
     termina-ejecucion
+
 finalizar-programa

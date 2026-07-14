@@ -1,92 +1,126 @@
 iniciar-programa
-	define-nueva-instruccion gira-n-veces(n) como inicio
-    	repetir n veces inicio
-        	gira-izquierda;
+
+    define-nueva-instruccion gira-n-veces(n) como inicio
+        repetir n veces inicio
+            gira-izquierda;
         fin;
     fin;
 
-	define-nueva-instruccion orientar-sur como inicio
-    	 si orientado-al-este entonces inicio
-         	gira-n-veces(3)
-         fin;
-         si orientado-al-oeste entonces inicio
-         	gira-n-veces(1)
-         fin;
-         si orientado-al-norte entonces inicio
-         	gira-n-veces(2)
-         fin;
+    define-nueva-instruccion gira-derecha como inicio
+        gira-n-veces(3);
     fin;
-    
+
+
+    define-nueva-instruccion orientar-sur como inicio
+        si orientado-al-este entonces inicio
+            gira-n-veces(3);
+        fin;
+
+        si orientado-al-oeste entonces inicio
+            gira-n-veces(1);
+        fin;
+
+        si orientado-al-norte entonces inicio
+            gira-n-veces(2);
+        fin;
+    fin;
+
     define-nueva-instruccion orientar-norte como inicio
-    	 si orientado-al-este entonces inicio
-         	gira-n-veces(1)
-         fin;
-         si orientado-al-oeste entonces inicio
-         	gira-n-veces(3)
-         fin;
-         si orientado-al-sur entonces inicio
-         	gira-n-veces(2)
-         fin;
+        si orientado-al-este entonces inicio
+            gira-n-veces(1);
+        fin;
+
+        si orientado-al-oeste entonces inicio
+            gira-n-veces(3);
+        fin;
+
+        si orientado-al-sur entonces inicio
+            gira-n-veces(2);
+        fin;
     fin;
-    
-    define-nueva-instruccion avanza-indefinido como inicio
-        si junto-a-zumbador entonces
+
+
+    define-nueva-instruccion recoge-zumbador-si-hay como inicio
+        si junto-a-zumbador entonces inicio
             coge-zumbador;
         fin;
-        mientras frente-libre hacer inicio
-         	avanza;
-            si junto-a-zumbador entonces inicio
-            	coge-zumbador;
-            fin;
-         fin;
     fin;
-    
-    define-nueva-instruccion gira-derecha como inicio
-    	gira-n-veces(3);
-    fin;
-    
-    define-nueva-instruccion ubicate-origen como inicio
-    	orientar-sur;
-        avanza-indefinido;
-        gira-derecha;
-        avanza-indefinido;
-        gira-derecha;
-    fin;
-        
 
-	inicia-ejecucion
-    	ubicate-origen;        
-        mientras frente-libre hacer inicio
-        	avanza-indefinido;            
-            gira-derecha;
-            si frente-libre entonces inicio
-            	avanza;
-            fin;
+    define-nueva-instruccion avanza-indefinido como inicio
+        recoge-zumbador-si-hay;
 
-            si junto-a-zumbador entonces inicio
-            	coge-zumbador;
-            fin;
-            gira-derecha;
-            avanza-indefinido;
-           	gira-izquierda;
-           	si frente-libre entonces inicio
-            	avanza;
-            fin
-            sino inicio
-            	orientar-sur;
-            fin;
-           	si junto-a-zumbador entonces inicio
-           		coge-zumbador;
-           	fin;
-           	gira-izquierda; 
+        mientras frente-libre hacer inicio
+            avanza;
+            recoge-zumbador-si-hay;
         fin;
-        
+    fin;
+
+
+    define-nueva-instruccion ubicate-origen como inicio
+        orientar-sur;
+        avanza-indefinido;
+        gira-derecha;
+        avanza-indefinido;
+        gira-derecha;
+    fin;
+
+
+    define-nueva-instruccion cambia-columna-derecha como inicio
+        gira-derecha;
+
+        si frente-libre entonces inicio
+            avanza;
+        fin;
+
+        recoge-zumbador-si-hay;
+        gira-derecha;
+    fin;
+
+    define-nueva-instruccion cambia-columna-izquierda como inicio
+        gira-izquierda;
+
+        si frente-libre entonces inicio
+            avanza;
+        fin
+        sino inicio
+            orientar-sur;
+        fin;
+
+        recoge-zumbador-si-hay;
+        gira-izquierda;
+    fin;
+
+
+    define-nueva-instruccion recorre-dos-columnas como inicio
+        avanza-indefinido;
+        cambia-columna-derecha;
+
+        avanza-indefinido;
+        cambia-columna-izquierda;
+    fin;
+
+
+    define-nueva-instruccion lleva-zumbadores-al-final como inicio
         orientar-norte;
         avanza-indefinido;
+
         mientras algun-zumbador-en-la-mochila hacer inicio
-        	deja-zumbador;
+            deja-zumbador;
         fin;
-        
+    fin;
+
+
+    inicia-ejecucion
+
+        ubicate-origen;
+
+        mientras frente-libre hacer inicio
+            recorre-dos-columnas;
+        fin;
+
+        lleva-zumbadores-al-final;
         apagate;
+
     termina-ejecucion
+
 finalizar-programa
